@@ -84,8 +84,7 @@ void heapify_zhora(int index) {
 		else
 			mensi = index_praveho_decka;
 	}
-
-	if (halda[index]->dialka < halda[mensi]->dialka && mensi != 0) {
+	if ((mensi != 0) && (halda[index]->dialka > halda[mensi]->dialka)) {
 		vymen(index, mensi);
 		heapify_zhora(mensi);
 	}
@@ -93,7 +92,7 @@ void heapify_zhora(int index) {
 
 vrchol* vyber_najmensi() {
 	vrchol* najmensi = halda[1];
-	free(halda[1]);
+	najmensi = halda[1];
 	halda[1] = NULL;
 	if (velkost_haldy != 1) {
 		vymen(1, velkost_haldy);
@@ -108,7 +107,7 @@ void vypis_mapu(char** mapa, int vyska, int sirka) {
 	printf("\n");
 	for (int i = 0; i < vyska; i++) {
 		for (int j = 0; j < sirka; j++) {
-			printf("%c", mapa[i][j]);
+			printf("%c ", mapa[i][j]);
 		}
 		printf("\n");
 	}
@@ -169,11 +168,17 @@ void pridaj_susedov_do_haldy(int vyska, int sirka, vrchol* aktualny) {
 int* zachran_princezne(char** mapa, int vyska, int sirka, int maximalny_cas, int* dlzka_cesty) {
 	inicializuj_haldu();
 	vytvor_graf(mapa, vyska, sirka);
-	int x = 0, y = 0;
-	graf[x][y]->dialka = 0;
-	graf[x][y]->predosly = graf[x][y];
-	pridaj_susedov_do_haldy(vyska, sirka, graf[x][y]);
-	vypis_haldu();				//teraz budem prehladavat prvy prvok v halde, a susedov tam znova pridam. az kym nebudem na konci a prvy prvok v halde bude mat vacsu dialku ako aktualny
+	vrchol* aktualny = graf[0][0];
+	aktualny->dialka = 1;
+	aktualny->predosly = aktualny;
+	pridaj_susedov_do_haldy(vyska, sirka, aktualny);
+					//teraz budem prehladavat prvy prvok v halde, a susedov tam znova pridam. az kym nebudem na konci a prvy prvok v halde bude mat vacsu dialku ako aktualny
+	while (aktualny->znak != 'D') {
+		vypis_haldu();
+		aktualny = vyber_najmensi();
+		pridaj_susedov_do_haldy(vyska, sirka, aktualny);
+	}
+	printf("NASIEL SOM DRAKA. je vzdialeny %d\n", aktualny->dialka);
 
 	//vypis_mapu(mapa,vyska,sirka);
 }
@@ -206,13 +211,3 @@ int main() {
 		printf("%d %d\n", cesta[i * 2], cesta[i * 2 + 1]);
 	return 0;
 }
-/*
-int main() {
-	inicializuj_haldu();
-	vrchol* boi = malloc(sizeof(vrchol));
-	boi->dialka = 5;
-	boi->znak = 'Y';
-	vloz(boi);
-	vypis_haldu();
-	return 0;
-}*/
