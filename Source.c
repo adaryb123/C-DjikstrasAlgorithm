@@ -52,6 +52,10 @@ void inicializuj_haldu() {
 	halda = calloc(1000, sizeof(vrchol*));	//da sa zvacsit
 }
 
+void uvolni_haldu() {
+	free(halda);
+}
+
 void vymen(int prvy, int druhy) {
 	vrchol* temp = halda[prvy];
 	halda[prvy] = halda[druhy];
@@ -82,8 +86,6 @@ void heapify_zdola(int index) {
 
 void vloz(vrchol* novy_vrchol) {
 	int novy_index = velkost_haldy + 1;
-	if (halda[novy_index] == NULL)
-		halda[novy_index] = malloc(sizeof(vrchol));
 	halda[novy_index] = novy_vrchol;
 	heapify_zdola(novy_index);
 	velkost_haldy = novy_index;
@@ -178,7 +180,6 @@ char zisti_stav(short stav, char nazov_stavu) {
 
 char nasli_sme_vsetky_princezne(int pocet_princezien, short stav) {
 	char vysledok = 1;
-	//printf("stav je %d\n",stav);
 	if (pocet_princezien > 0)
 		vysledok = vysledok & zisti_stav(stav, 'Z');
 	if (pocet_princezien > 1)
@@ -208,21 +209,33 @@ void vytvor_graf(char** mapa, int vyska, int sirka) {
 	int i = 0, j = 0,k =0;
 	graf = calloc(vyska, sizeof(vrchol ***));
 	for (i = 0; i < vyska; i++) {
-		graf[i] = calloc(sirka, sizeof(vrchol * *));
-		for (j = 0; j < sirka; j++)
+		graf[i] = calloc(sirka, sizeof(vrchol **));
+		for (j = 0; j < sirka; j++) {
 			graf[i][j] = calloc(POCET_STAVOV, sizeof(vrchol*));
+			for (k = 0; k < POCET_STAVOV; k++) {
+				graf[i][j][k] = malloc(sizeof(vrchol));
+				graf[i][j][k]->znak = mapa[i][j];
+				graf[i][j][k]->x = i;
+				graf[i][j][k]->y = j;
+				graf[i][j][k]->dialka = INFINITY;
+				graf[i][j][k]->stav = k;
+				graf[i][j][k]->predosly = NULL;
+				//graf[i][j][k]->preskumany = 0;
+			}
+		}
 	}
 
 		for (i = 0; i < vyska; i++) {
 			for (j = 0; j < sirka; j++) {
 				for (k = 0; k < POCET_STAVOV; k++) {
-					graf[i][j][k] = malloc(sizeof(vrchol));
+					//graf[i][j][k] = malloc(sizeof(vrchol));
 					graf[i][j][k]->znak = mapa[i][j];
 					graf[i][j][k]->x = i;
 					graf[i][j][k]->y = j;
 					graf[i][j][k]->dialka = INFINITY;
 					graf[i][j][k]->stav = k;
 					graf[i][j][k]->predosly = NULL;
+					//graf[i][j][k]->predosly = calloc(1,sizeof(vrchol*));
 					//graf[i][j][k]->preskumany = 0;
 				}
 			}
@@ -241,7 +254,6 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 		if (zisti_hodnotu_bajtu(aktualny->stav, 1) == 0) {
 			if (aktualny->dialka + dlzka_hrany < sused->dialka) {
 				sused->dialka = aktualny->dialka + dlzka_hrany;
-				sused->predosly = malloc(sizeof(vrchol*));
 				sused->predosly = aktualny;
 				//sused->preskumany = 1;
 				sused->stav = prepni_stav(sused->stav, 'D');
@@ -254,7 +266,6 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 		if (zisti_hodnotu_bajtu(aktualny->stav, 1) == 1) {
 			if (aktualny->dialka + dlzka_hrany < sused->dialka) {
 				sused->dialka = aktualny->dialka + dlzka_hrany;
-				sused->predosly = malloc(sizeof(vrchol*));
 				sused->predosly = aktualny;
 				//sused->preskumany = 1;
 				sused->stav = prepni_stav(sused->stav, 'Z');
@@ -267,7 +278,6 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 		if (zisti_hodnotu_bajtu(aktualny->stav, 1) == 1) {
 			if (aktualny->dialka + dlzka_hrany < sused->dialka) {
 				sused->dialka = aktualny->dialka + dlzka_hrany;
-				sused->predosly = malloc(sizeof(vrchol*));
 				sused->predosly = aktualny;
 				//sused->preskumany = 1;
 				sused->stav = prepni_stav(sused->stav, 'Y');
@@ -280,7 +290,6 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 		if (zisti_hodnotu_bajtu(aktualny->stav, 1) == 1) {
 			if (aktualny->dialka + dlzka_hrany < sused->dialka) {
 				sused->dialka = aktualny->dialka + dlzka_hrany;
-				sused->predosly = malloc(sizeof(vrchol*));
 				sused->predosly = aktualny;
 				//sused->preskumany = 1;
 				sused->stav = prepni_stav(sused->stav, 'W');
@@ -293,9 +302,7 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 
 	if (aktualny->dialka + dlzka_hrany < sused->dialka) {
 		sused->dialka = aktualny->dialka + dlzka_hrany;
-		sused->predosly = malloc(sizeof(vrchol*));
 		sused->predosly = aktualny;
-		//sused->preskumany = 1;
 		vloz(sused);
 	}
 }
@@ -340,6 +347,20 @@ char** objav_princezne(char** mapa, int vyska, int sirka) { // tato funkcia moze
 	return mapa;
 }
 
+void uvolni_pamat(int vyska, int sirka) {
+	int i, j, k;
+	for (i = 0; i < vyska; i++) {
+		for (j = 0; j < sirka; j++) {
+			for (k = 0; k < POCET_STAVOV; k++) {
+				free(graf[i][j][k]);
+			}
+			free(graf[i][j]);
+		}
+		free(graf[i]);
+	}
+	free(graf);
+}
+
 int* urob_cestu(vrchol* posledny,int *pocet_suradnic) {
 	vrchol* aktualny = posledny;
 	int dlzka_pola = 2;
@@ -368,7 +389,6 @@ int *zachran_princezne(char** mapa, int vyska, int sirka, int maximalny_cas, int
 	vytvor_graf(mapa, vyska, sirka);
 	vrchol* aktualny = graf[0][0][0];
 	aktualny->dialka = 1;
-	aktualny->predosly = malloc(sizeof(vrchol*));
 	aktualny->predosly = aktualny;
 					//teraz budem prehladavat prvy prvok v halde, a susedov tam znova pridam. az kym nebudem na konci a prvy prvok v halde bude mat vacsu dialku ako aktualny
 	while (nasli_sme_vsetky_princezne(pocet_princezien,aktualny->stav) != 1) {
@@ -376,8 +396,11 @@ int *zachran_princezne(char** mapa, int vyska, int sirka, int maximalny_cas, int
 		aktualny = vyber_najmensi();
 		//printf("suradnice %d %d znak je %c a sme v stave %d\n", aktualny->x, aktualny->y, aktualny->znak, aktualny->stav);
 	}
-	printf("HOTOVO. cesta je %d\n", aktualny->dialka);			
-	return urob_cestu(aktualny,dlzka_cesty);
+	printf("HOTOVO. cesta je %d\n", aktualny->dialka);	
+	int* vysledok = urob_cestu(aktualny, dlzka_cesty);
+	uvolni_pamat(vyska, sirka);
+	uvolni_haldu();
+	return vysledok;
 }
 
 int main() {
