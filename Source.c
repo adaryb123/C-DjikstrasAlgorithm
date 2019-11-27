@@ -26,6 +26,49 @@ H H C H C P H H C C P
 H H H C H C H C C C C
 C C D C C H C H C C C
 C C C C C H C C C H H
+
+40 50 272
+
+C C C C C C C C H G C C C H C C C C C C H C C C C C C C H C C C H H H C H C C C C C C C C C C C C C
+C C C C C C C H C 2 C H C C C H C H C C C C C H H H C H C C H H H C C C 0 C C C C H C C H C C C C C
+C C C H C C C C 0 C C C 2 C C C C H C C C C H C C C C C C C C C H C C C C C C H C C C C C H H C H C
+C H C C C C C C C C C C C C C C C C C H H H C C C C H C H C H C H C C 3 C C H C C C C H C C C H C C
+C C C H C C C H C H H C C H C C C C C H H C C H C C H C C C C C C H H C C H C C H H C H C C C C C H
+H C C C C H C C H C C C 0 C C C C C C C C H C H C C C C C H C C C C H C C C C C C H H C C H C C C C
+C C C H C H C C C C C H H C C C C C C H C C C C C H C C P C C C C C C C H C C C C C C C C H C H C C
+C C C H C H C C H C H C C C C H H C C C C C C C C C C C H C C H C C C C C C C C C C C H C C C H H C
+C C C C C C C C C C C C C H C C C C C H C H H C C H C C C C C C H H C C C 3 C H C H H C C C C C C H
+C C C C C C H C C H C 0 H C C H C C H H C C C H C C C C C C C C H C C C C C C C C C C H H C 3 H C C
+C C C H C C C C C C H C C H C C C C H H C H C C C C C C C C C H C C H C C C C C H C C C C C C C C C
+H C C C C H H C C C C C C C C C C C C C H C C C C H H C C C C C C H C C H C C C C C C H C C C H C C
+C C C H C C C C C C H C C C C C H H C C C 0 C C C H C H H 1 C C C C C C H C C C C C H C C H C C C C
+H H C C C C C C H H C C C H H C H C C C C C C C C C C C C C C C C C C C H C H C C H C C C C H C C C
+C C C C H C H C C H H C H H C C C H H C C H H C C C H C C C C C C C H H C C C C C C C C H C C C H C
+C C C H C C H H C H C C H H C C C C C H C C C C C C C C C H C C C C C C C C C C C C C C C C C C C C
+C C C C C C C 2 C H C C H C C C C C H C C C H C C C H H C C H C C H H C C C C C C C H C C 0 H H H C
+H H C C C P C C C H C H H 1 C C C H C H C C C H C C C H C H H C C C C C C C C C C C C H C C C C C C
+C C C C C C C H C H C C C H H C H C C H C H C C C C C C C C C C H C C C C C C C C C C C C H C C C C
+C C C H C C C C C C C H H C H 0 C C C C C C C H C H C C C C H H H C C C C H C H C C C C C C C 2 C C
+C C H H C C H C C C C C C C C C C C C C C C H C C C C C C C C H C C C C C C H C C C C C H C H C H H
+H H C H C C C C C C C C C C C C C C C H C H C C C C C C H C C H C C C C C C C C C C C C C C C H C C
+C C H C C 0 C H C C C C C H C C C C C C C C C C C H C H C C C C 3 H H C C C C C C C 2 C C C C C C C
+H H C C C C H C C H C C C C C C C H C C C C C C C C C C C H C C H H C C H C C C H C H C H C H H C C
+C C H C C C C H C C C C C C C C H C C C C C C C C C C C C H H H H H C H C C C C C C C C H C C C C C
+C C C C C C C C H H C C C C C C C C C C C C H C C C H H C C C C C C H D C C C C C H C H C C H C C C
+H C C C C C C C H H C C H C H C C C C H C H C C C C C C C C C C C C C H C C C 2 C C C C C C C C C C
+H C H C H C H H H C C C C H H C C C C C H C C 1 C H C C H H C H H C C H C C C C C C C C C C C C C C
+C C C C C C C C C C C H C C C C C C H C C C H C C H H H C C C C C H C C C C C H C C C C C C C C H C
+C C H C H C C C C C C C C H C C C C H C H C 2 H H C C P H C 0 H C H H H C C 2 H C C H H H H C C C C
+C C C C C C C C C C C H C C C C H C H C C C C C C C C H C C C C C C C C H H H C C H C C H C C C C H
+C C H C C C C C C C C C C C C C H C C C C C C C C C C C C C H C C C C C C C H C C C C H C C H H H C
+C H C H C C C C C C C H C C H H H C C H C C C C C H C H C C C C C H C H C C H C C C C C C C H C C C
+H C C H C C H H C C C C C C C H H H C H H H C H H C C H C H C C C C C C C H C C C C C H C C C C C C
+C C C C C C C C C C C C C C C C H C C C C C C H C H C C C H C C H H H C C H C H C C H H C C C C C H
+C H C C H C C C H C C C C H C C C C C H H H C H C C C H H C C C C C C C H H C C C H C H C C H C C C
+C C H C C C H C C C C C C C C C C C 2 C C C C C C H C C C C C C H C C C C C C C H C C C H C C C C C
+H C C C C H H H C C C C C C H C C C H C H C C C C H C C C H C C C C C H C C C C C C C C C C C H C H
+C H H H H H H H C C H C C C C C H C C C H C C C C C C C C H C H C C C C C C C H H C C C C H C C C 0
+C C C C H H C C C H H C H C C C C C H H C C C H C C C C C C H H C C C C C C C H C C C H C C C C C C
 */
 
 typedef struct vrchol {
@@ -39,13 +82,34 @@ typedef struct vrchol {
 }vrchol;
 
 vrchol**** graf = NULL;
-
+int** teleporty = NULL;
 //___________________________________________________________________________________________________________________________________________
 vrchol** halda = NULL;
 int velkost_haldy = 0;
 
 void inicializuj_haldu() {
 	halda = calloc(TAKTO_VELKA_BUDE_HALDA, sizeof(vrchol*));
+}
+
+void vytvor_pole_teleportov() {
+	teleporty = calloc(10 , sizeof(int*));
+	for (int i = 0; i < 10; i++) 
+		teleporty[i] = calloc(1, sizeof(int));
+}
+
+void uvolni_pole_teleportov() {
+	for (int i = 0; i < 10; i++) 
+		free(teleporty[i]);
+	free(teleporty);
+}
+
+void vypis_pole_teleportov() {
+	for (int i = 0; i < 10; i++) {
+		printf("pocet teleportov s cislom %d je %d\n", i, teleporty[i][0]);
+		for (int j = 1; j < teleporty[i][0]; j+=2) {
+			printf(" %d,%d\n", teleporty[i][j],teleporty[i][j + 1]);
+		}
+	}
 }
 
 void vymen(int prvy, int druhy) {
@@ -249,6 +313,40 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 			}
 		}
 	}
+	else if (znak == 'G') {
+		dlzka_hrany = 1;
+		if (zisti_stav(aktualny->stav, 'G') == 0) {
+			if (aktualny->dialka + dlzka_hrany < sused->dialka) {
+				sused->dialka = aktualny->dialka + dlzka_hrany;
+				sused->predosly = aktualny;
+				sused->preskumany = 1;
+				sused->stav = prepni_stav(sused->stav, 'G');
+				vloz(sused);
+			}
+		}
+	}
+	else if (znak >= '0' && znak <= '9') {
+		dlzka_hrany = 1;
+		if (aktualny->dialka + dlzka_hrany < sused->dialka) {
+			sused->dialka = aktualny->dialka + dlzka_hrany;
+			sused->predosly = aktualny;
+			sused->preskumany = 1;
+			vloz(sused);
+			if (zisti_stav(aktualny->stav, 'G') == 1) {
+				int cislo = znak - '0';
+				for (int i = 1; i < teleporty[cislo][0]; i += 2) {
+					vrchol* teleportovy_sused = graf[teleporty[cislo][i]][teleporty[cislo][i + 1]][aktualny->stav];
+					if (aktualny->dialka + dlzka_hrany < teleportovy_sused->dialka) {
+						teleportovy_sused->dialka = aktualny->dialka + dlzka_hrany;
+						teleportovy_sused->predosly = aktualny;
+						teleportovy_sused->preskumany = 1;
+						vloz(teleportovy_sused);
+					}
+				}
+			}
+		}
+		return;
+	}
 	else
 		dlzka_hrany = 1;
 
@@ -295,6 +393,14 @@ char** objav_princezne(char** mapa, int vyska, int sirka,int *pocet_princezien) 
 					mapa[i][j] = 'V';
 				}
 				*pocet_princezien = *pocet_princezien + 1;
+			}
+			else if (mapa[i][j] >= '0' && mapa[i][j] <= '9') {
+				int cislo = mapa[i][j] - '0';
+				int index = teleporty[cislo][0];
+				teleporty[cislo] = realloc(teleporty[cislo], (3 + index) * sizeof(int));
+				teleporty[cislo][index + 1] = i;
+				teleporty[cislo][index + 2] = j;
+				teleporty[cislo][0] += 2;
 			}
 		}
 	return mapa;
@@ -345,10 +451,12 @@ int zrataj_stavy(int pocet_princezien) {
 
 int* zachran_princezne(char** mapa, int vyska, int sirka, int maximalny_cas, int* dlzka_cesty) {
 	inicializuj_haldu();
+	vytvor_pole_teleportov();
 	int pocet_princezien = 0;
 	mapa = objav_princezne(mapa, vyska, sirka,&pocet_princezien);
 	int pocet_stavov = zrataj_stavy(pocet_princezien);
-	vypis_mapu(mapa, vyska, sirka);
+	//vypis_mapu(mapa, vyska, sirka);
+	//vypis_pole_teleportov();
 	vytvor_graf(mapa, vyska, sirka,pocet_stavov);
 	vrchol* aktualny = graf[0][0][0];
 	aktualny->dialka = 1;
@@ -361,6 +469,7 @@ int* zachran_princezne(char** mapa, int vyska, int sirka, int maximalny_cas, int
 	int* vysledok = urob_cestu(aktualny, dlzka_cesty);
 	uvolni_pamat(vyska, sirka,pocet_stavov);
 	free(halda);
+	uvolni_pole_teleportov();
 	return vysledok;
 }
 
