@@ -62,7 +62,7 @@ typedef struct vrchol {
 	short y;
 	char znak;
 	int dialka;
-	short stav;
+	char stav;
 	struct vrchol* predosly;
 }vrchol;
 
@@ -137,7 +137,7 @@ int zrataj_stavy(int pocet_princezien) {
 															//FUNKCIE NA UVOLNENIE PAMATE
 
 void uvolni_pole_teleportov() {
-	for (int i = 0; i < 10; i++) 
+	for (int i = 0; i < 10; i++)
 		free(teleporty[i]);
 }
 
@@ -222,11 +222,11 @@ vrchol* vyber_najmensi() {
 //_____________________________________________________________________________________________________________________________________________
 																//FUNKCIE NA BITOVE POSUNY
 
-char zisti_hodnotu_bajtu(short stav, int pozicia) {
+char zisti_hodnotu_bajtu(char stav, int pozicia) {
 	return (stav >> (pozicia - 1)) & 1;
 }
 
-short nastav_hodnotu_bajtu(short stav, int pozicia, char hodnota) {
+short nastav_hodnotu_bajtu(char stav, int pozicia, char hodnota) {
 	if (hodnota == 1)
 		return (1 << (pozicia - 1)) | stav;
 	else if (hodnota == 0)
@@ -236,7 +236,7 @@ short nastav_hodnotu_bajtu(short stav, int pozicia, char hodnota) {
 	return -1;
 }
 
-short prepni_stav(short stav, char nazov_stavu) {
+short prepni_stav(char stav, char nazov_stavu) {
 	if (nazov_stavu == 'D')
 		return nastav_hodnotu_bajtu(stav, 1, 1);
 	else if (nazov_stavu == 'G')
@@ -256,7 +256,7 @@ short prepni_stav(short stav, char nazov_stavu) {
 	return stav;
 }
 
-char zisti_stav(short stav, char nazov_stavu) {
+char zisti_stav(char stav, char nazov_stavu) {
 	if (nazov_stavu == 'D')
 		return zisti_hodnotu_bajtu(stav, 1);
 	else if (nazov_stavu == 'G')
@@ -276,7 +276,7 @@ char zisti_stav(short stav, char nazov_stavu) {
 	return 0;
 }
 
-char nasli_sme_vsetky_princezne(int pocet_princezien, short stav) {
+char nasli_sme_vsetky_princezne(int pocet_princezien, char stav) {
 	char vysledok = 1;
 	if (pocet_princezien > 0)
 		vysledok = vysledok & zisti_stav(stav, 'Z');
@@ -328,12 +328,13 @@ void pridaj_jedneho_suseda(vrchol* aktualny, vrchol* sused) {
 			vloz_ak_vyhovuje(aktualny, sused, dlzka_hrany);
 			int cislo = znak - '0';
 			dlzka_hrany = 0;
+			int stav = sused->stav;
 			for (int i = 1; i < teleporty[cislo][0]; i += 2) {
-				vrchol* teleportovy_sused = graf[teleporty[cislo][i]][teleporty[cislo][i + 1]][aktualny->stav];
+				vrchol* teleportovy_sused = graf[teleporty[cislo][i]][teleporty[cislo][i + 1]][stav];
 				vloz_ak_vyhovuje(sused, teleportovy_sused, dlzka_hrany);
 			}
 		}
-		else 
+		else
 			vloz_ak_vyhovuje(aktualny, sused, dlzka_hrany);
 	}
 }
@@ -354,32 +355,35 @@ void pridaj_susedov_do_haldy(int vyska, int sirka, int stav, vrchol* aktualny) {
 		pridaj_jedneho_suseda(aktualny, graf[x][y + 1][stav]);
 }
 
-char** objav_princezne_a_teleporty(char** mapa, int vyska, int sirka,int *pocet_princezien) { 
+void pridaj_objaveny_teleport(int vyska, int sirka, char znak) {
+	int cislo = znak - '0';
+	int index = teleporty[cislo][0];
+	teleporty[cislo] = realloc(teleporty[cislo], (3 + index) * sizeof(int));
+	teleporty[cislo][index + 1] = vyska;
+	teleporty[cislo][index + 2] = sirka;
+	teleporty[cislo][0] += 2;
+}
+
+char** objav_princezne_a_teleporty(char** mapa, int vyska, int sirka, int* pocet_princezien) {
 	vytvor_pole_teleportov();
 	for (int i = 0; i < vyska; i++) {
 		for (int j = 0; j < sirka; j++) {
 			if (mapa[i][j] == 'P') {
 				if (*pocet_princezien == 0)
 					mapa[i][j] = 'Z';
-				else if (*pocet_princezien == 1) 
-					mapa[i][j] = 'Y';		
-				else if (*pocet_princezien == 2) 
+				else if (*pocet_princezien == 1)
+					mapa[i][j] = 'Y';
+				else if (*pocet_princezien == 2)
 					mapa[i][j] = 'X';
-				else if (*pocet_princezien == 3) 
+				else if (*pocet_princezien == 3)
 					mapa[i][j] = 'W';
-				else if (*pocet_princezien == 4) 
+				else if (*pocet_princezien == 4)
 					mapa[i][j] = 'V';
-				
+
 				*pocet_princezien = *pocet_princezien + 1;
 			}
-			else if (mapa[i][j] >= '0' && mapa[i][j] <= '9') {
-				int cislo = mapa[i][j] - '0';
-				int index = teleporty[cislo][0];
-				teleporty[cislo] = realloc(teleporty[cislo], (3 + index) * sizeof(int));
-				teleporty[cislo][index + 1] = i;
-				teleporty[cislo][index + 2] = j;
-				teleporty[cislo][0] += 2;
-			}
+			else if (mapa[i][j] >= '0' && mapa[i][j] <= '9')
+				pridaj_objaveny_teleport(i, j, mapa[i][j]);
 		}
 	}
 	return mapa;
@@ -409,20 +413,20 @@ int* urob_cestu(vrchol* posledny, int* pocet_suradnic) {
 
 int* zachran_princezne(char** mapa, int vyska, int sirka, int maximalny_cas, int* dlzka_cesty) {
 	int pocet_princezien = 0;
-	mapa = objav_princezne_a_teleporty(mapa, vyska, sirka,&pocet_princezien); //zistime kolko princezien je , a zapiseme si suradnice teleportov
+	mapa = objav_princezne_a_teleporty(mapa, vyska, sirka, &pocet_princezien); //zistime kolko princezien je , a zapiseme si suradnice teleportov
 	int pocet_stavov = zrataj_stavy(pocet_princezien);			//podla poctu prncezien vyratame kolko stavov moze nastat
-	vytvor_graf(mapa, vyska, sirka,pocet_stavov);		//graf bude trojrozmerne pole s rozermi VYSKA x SIRKA x POCET STAVOV
+	vytvor_graf(mapa, vyska, sirka, pocet_stavov);		//graf bude trojrozmerne pole s rozermi VYSKA x SIRKA x POCET STAVOV
 
 	vrchol* aktualny = graf[0][0][0];				//zacneme z laveho horneho rohu
 	aktualny->dialka = 1;
-	
+
 	while (nasli_sme_vsetky_princezne(pocet_princezien, aktualny->stav) != 1) {		//kym nie sme v stave , v ktorom su najdene vsetky princezne:
 		pridaj_susedov_do_haldy(vyska, sirka, aktualny->stav, aktualny);		//pridame do haldy vsetky vyhovujuce susedne vrcholy akutalneho vrcholu
 		aktualny = vyber_najmensi();						//pokracujeme na najlacnejsi vrchol v halde
 	}
 
 	int* vysledok = urob_cestu(aktualny, dlzka_cesty);		//vratime sa po vlastnych stopach, tak vznikne cesta
-	uvolni_pamat(vyska, sirka,pocet_stavov);
+	uvolni_pamat(vyska, sirka, pocet_stavov);
 	return vysledok;
 }
 
